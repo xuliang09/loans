@@ -1,8 +1,11 @@
 package com.loans.dao;
 
-import com.loans.domain.User;
+import com.loans.domain.CompanyOrIndividual;
+import com.loans.domain.OfficeWorker;
 
 public interface UserInfoDao
 {
-    int addUser(User user);
+    int addCompanyOrIndividual(CompanyOrIndividual user);
+    
+    int addOfficeWorker(OfficeWorker user);
 }

@@ -4,5 +4,5 @@ import com.loans.domain.User;
 
 public interface UserInfoManage
 {
-    int insert(User user);
+    int addUser(User user);
 }
