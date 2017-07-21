@@ -21,6 +21,6 @@ public class MainController
     @RequestMapping(value = "/isalive", method = RequestMethod.GET)
     public @ResponseBody String isAlive()
     {
-        return "alive!";
+        return "index";
     }
 }
