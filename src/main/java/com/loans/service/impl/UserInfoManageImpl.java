@@ -1,5 +1,8 @@
 package com.loans.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.loans.dao.UserInfoDao;
@@ -12,7 +15,7 @@ public class UserInfoManageImpl implements UserInfoManage
 {
     @Autowired
     UserInfoDao userInfoDao;
-    
+
     @Override
     public int addUser(User user)
     {
@@ -20,12 +23,13 @@ public class UserInfoManageImpl implements UserInfoManage
         {
             if (user instanceof CompanyOrIndividual)
             {
-                int state = userInfoDao.addCompanyOrIndividual((CompanyOrIndividual)user);
+                int state = userInfoDao
+                        .addCompanyOrIndividual((CompanyOrIndividual) user);
                 return state;
             }
             else if (user instanceof OfficeWorker)
             {
-                int state = userInfoDao.addOfficeWorker((OfficeWorker)user);
+                int state = userInfoDao.addOfficeWorker((OfficeWorker) user);
                 return state;
             }
             else
@@ -37,6 +41,74 @@ public class UserInfoManageImpl implements UserInfoManage
         {
             e.printStackTrace();
             return 1;
+        }
+    }
+
+    @Override
+    public List<User> findByName(String name)
+    {
+        List<User> userList = new ArrayList<User>();
+        try
+        {
+            List<CompanyOrIndividual> companyOrIndividualUserList = userInfoDao
+                    .findByNameInCompanyOrIndividual(name);
+            List<OfficeWorker> officeWorkerUserList = userInfoDao
+                    .findByNameInOfficeWorker(name);
+
+            if (companyOrIndividualUserList != null)
+            {
+                for (CompanyOrIndividual companyOrIndividual : companyOrIndividualUserList)
+                {
+
+                    userList.add(companyOrIndividual);
+                }
+            }
+            if (officeWorkerUserList != null)
+            {
+                for (OfficeWorker officeWorker : officeWorkerUserList)
+                {
+                    userList.add(officeWorker);
+                }
+            }
+
+            return userList;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public List<User> findByPhoneNumber(String phoneNumber)
+    {
+        List<User> userList = new ArrayList<User>();
+        try
+        {
+            List<CompanyOrIndividual> companyOrIndividualUserList = userInfoDao
+                    .findByPhoneNumberInCompanyOrIndividual(phoneNumber);
+            List<OfficeWorker> officeWorkerUserList = userInfoDao
+                    .findByPhoneNumberInOfficeWorker(phoneNumber);
+            if (companyOrIndividualUserList != null)
+            {
+                for (CompanyOrIndividual companyOrIndividual : companyOrIndividualUserList)
+                {
+                    userList.add(companyOrIndividual);
+                }
+            }
+            if (officeWorkerUserList != null)
+            {
+                for (OfficeWorker officeWorker : officeWorkerUserList)
+                {
+                    userList.add(officeWorker);
+                }
+            }
+
+            return userList;
+        }
+        catch (Exception e)
+        {
+            return null;
         }
     }
 

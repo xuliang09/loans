@@ -1,19 +1,22 @@
 package com.loans.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "CompanyOrIndividual")
 public class CompanyOrIndividual extends User
 {
     // 是否法人代表
     private String legalRepresentative;
-    
+
     // 企业是否正常运营
     private String companyOpearteState;
-    
+
     // 营业执照年限
     private String businessLicenseAge;
-    
+
     // 月对公流水
     private String publicAccountMonthly;
-    
+
     // 月对私流水
     private String privateAccountMonthly;
 

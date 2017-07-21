@@ -1,22 +1,25 @@
 package com.loans.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "OfficeWorker")
 public class OfficeWorker extends User
 {
     // 月打卡工资
     private double monthlySalary;
-    
+
     // 能否提供收入证明
-    private String provideIncomeProof; 
-    
+    private String provideIncomeProof;
+
     // 现单位工作时间
-    private String workTimeInCurrentCompany; 
-    
+    private String workTimeInCurrentCompany;
+
     // 工作所在地
-    private String workplace; 
-    
+    private String workplace;
+
     // 有无社保公积金
-    private String publicFundOfSocialSecurity; 
-    
+    private String publicFundOfSocialSecurity;
+
     // 社保公积金连续缴纳时间
     private String continuedPayTimeOfSocialSecurityPublicFund;
 
@@ -79,5 +82,5 @@ public class OfficeWorker extends User
             String continuedPayTimeOfSocialSecurityPublicFund)
     {
         this.continuedPayTimeOfSocialSecurityPublicFund = continuedPayTimeOfSocialSecurityPublicFund;
-    } 
+    }
 }

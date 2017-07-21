@@ -1,9 +1,24 @@
 package com.loans.domain;
 
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+
 public abstract class User
 {
-    private String createTime;
+    // id
+    @Id
+    private String id;
+    
+    // 账户创建时间
+    private Date createDate;
 
+    // 姓名
+    private String name;
+    
+    // 手机号
+    private String phoneNumber; 
+    
     // 需求金额
     private int demandMoney;
 
@@ -54,14 +69,44 @@ public abstract class User
     // 分为 有、无
     private String hasLoanOnCar;
 
-    public String getCreateTime()
+    public String getId()
     {
-        return createTime;
+        return id;
     }
 
-    public void setCreateTime(String createTime)
+    public void setId(String id)
     {
-        this.createTime = createTime;
+        this.id = id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Date getCreateDate()
+    {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate)
+    {
+        this.createDate = createDate;
     }
 
     public int getDemandMoney()
