@@ -1,6 +1,8 @@
 package com.loans.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,14 @@ public class UserInfoManageImpl implements UserInfoManage
     @Override
     public int addUser(User user)
     {
+        if (user == null)
+        {
+            return 1;
+        }
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 设置日期格式
+        user.setCreateDate(df.format(new Date())); // 设置用户创建日期
+        
         try
         {
             if (user instanceof CompanyOrIndividual)
