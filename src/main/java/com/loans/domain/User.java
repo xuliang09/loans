@@ -1,7 +1,5 @@
 package com.loans.domain;
 
-import java.util.Date;
-
 import org.springframework.data.annotation.Id;
 
 public abstract class User
@@ -9,16 +7,16 @@ public abstract class User
     // id
     @Id
     private String id;
-    
+
     // 账户创建时间
-    private Date createDate;
+    private String createDate;
 
     // 姓名
     private String name;
-    
+
     // 手机号
-    private String phoneNumber; 
-    
+    private String phoneNumber;
+
     // 需求金额
     private int demandMoney;
 
@@ -63,7 +61,7 @@ public abstract class User
     private String carPrice;
 
     // 车龄
-    private int carAge;
+    private String carAge;
 
     // 车辆有无贷款
     // 分为 有、无
@@ -99,12 +97,12 @@ public abstract class User
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getCreateDate()
+    public String getCreateDate()
     {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate)
+    public void setCreateDate(String createDate)
     {
         this.createDate = createDate;
     }
@@ -229,12 +227,12 @@ public abstract class User
         this.carPrice = carPrice;
     }
 
-    public int getCarAge()
+    public String getCarAge()
     {
         return carAge;
     }
 
-    public void setCarAge(int carAge)
+    public void setCarAge(String carAge)
     {
         this.carAge = carAge;
     }
