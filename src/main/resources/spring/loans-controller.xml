@@ -14,20 +14,15 @@
             http://www.springframework.org/schema/tx     
             http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-	<mvc:resources mapping="js/**" location="resources/js/"/>
-    <mvc:resources mapping="startbootstrap2/**" location="resources/startbootstrap-sb-admin-2-gh-pages/"/> 
-    <mvc:resources mapping="multi-select/**" location="resources/bootstrap-select-master/"/> 
-    <mvc:resources mapping="dataTables/**" location="resources/DataTables-master/"/>
-    <mvc:resources mapping="images/**" location="resources/images/"/>
-    <mvc:resources mapping="css/**" location="resources/css/"/>
-    <mvc:resources mapping="slick-master/**" location="resources/slick-master/"/>
+	<mvc:resources mapping="js/**" location="WEB-INF/view/dist/static/js/"/>
+    <mvc:resources mapping="css/**" location="WEB-INF/view/dist/static/css/"/> 
 
 	<mvc:default-servlet-handler /> 
 	<context:component-scan base-package="com.loans.controller" />  
     <mvc:annotation-driven />
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">    
-        <property name="prefix" value="/WEB-INF/view/" />    
+        <property name="prefix" value="/WEB-INF/view/dist/" />    
         <property name="suffix" value=".html" />
 	</bean>  
 	

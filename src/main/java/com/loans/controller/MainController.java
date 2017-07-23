@@ -35,8 +35,8 @@ public class MainController
     UserInfoManage userInfoManage;
 
     // 判断连通
-    @RequestMapping(value = "/isalive", method = RequestMethod.GET)
-    public @ResponseBody String isAlive()
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index()
     {
         return "index";
     }
