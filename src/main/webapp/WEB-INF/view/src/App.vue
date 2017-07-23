@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <div class="content-wrapper">
+    <div class="content-wrapper" v-show="!infoFormShow">
       <div class="title">
         <div class="title-one">放款快至2小时</div>
         <div class="title-two">最低一万起放</div>
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="footer-wrapper">
+    <div class="footer-wrapper" v-show="!infoFormShow">
       <div class="title">贷款产品</div>
       <div class="prod-wrapper">
         <span class="prod-one">
@@ -41,20 +41,26 @@
         </span>
       </div>
     </div>
+    <userInfo v-show="infoFormShow"></userInfo>
   </div>
 
 </template>
 
 <script>
+import userInfo from '@/components/userInfo'
+
 export default {
   data () {
     return {
       user: {
         name: '',
         tel: 13000000000
-      }
-
+      },
+      infoFormShow: true
     }
+  },
+  components: {
+    userInfo
   }
 }
 </script>
