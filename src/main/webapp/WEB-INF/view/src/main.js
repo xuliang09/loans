@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 require('!style-loader!css-loader!less-loader!@/common/css/index.less')
+require('!style-loader!css-loader!less-loader!@/common/css/icon.less')
 
 Vue.config.productionTip = false
 

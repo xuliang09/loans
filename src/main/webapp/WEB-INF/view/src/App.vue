@@ -9,20 +9,40 @@
         <div class="tips">21-60周岁均可申请</div>
         <div class="form">
           <div class="name-wrapper">
-            <span class="name-icon"></span>
+            <span class="name-icon icon-user"></span>
             <input class="name" placeholder="请输入您的姓名"/>
           </div>
           <div class="tel-wrapper">
-            <span class="tel-icon"></span>
+            <span class="tel-icon icon-mobile"></span>
             <input class="tel" placeholder="请输入您的手机号码"/>
           </div>
           <div class="apply">立即申请</div>
         </div>
       </div>
     </div>
-    <div class="footer-wrapper"></div>
+    <div class="footer-wrapper">
+      <div class="title">贷款产品</div>
+      <div class="prod-wrapper">
+        <span class="prod-one">
+          <div class="image"></div>
+          <div class="desc">有房就能贷</div>
+        </span>
+        <span class="prod-two">
+          <div class="image"></div>
+          <div class="desc">有车险就能贷</div>
+        </span>
+        <span class="prod-three">
+          <div class="image"></div>
+          <div class="desc">信用贷</div>
+        </span>
+        <span class="prod-four">
+          <div class="image"></div>
+          <div class="desc">零用贷</div>
+        </span>
+      </div>
+    </div>
   </div>
-  
+
 </template>
 
 <script>
@@ -40,7 +60,7 @@ export default {
 </script>
 
 <style lang="less">
-  .app .content-wrapper {
+  .content-wrapper {
     width: 100%;
     height: 400px;
     margin: 0;
@@ -85,19 +105,48 @@ export default {
         padding: 20px 15px 40px;
         box-sizing: border-box;
         .name-wrapper {
-          height: 29px;
+          display: flex;
+          // height: 29px;
           padding: 0 0 20px;
+          .name-icon {
+            display: inline-block;
+            flex: 0 0 29px;
+            margin-right: 5px; 
+            width: 29px;
+            height: 29px;
+            line-height: 29px;
+            vertical-align: top;
+            font-size: 20px;
+            color: #fff;
+            background: rgb(246, 92, 2);
+          }
           .name {
             display: inline-block;
+            flex: 1;
             height: 25px;
             line-height: 25px;
+            vertical-align: top;
             border: 2px solid rgb(127, 71, 48);
           }
         }
         .tel-wrapper {
+          display: flex;
           height: 29px;
+          .tel-icon {
+            display: inline-block;
+            flex: 0 0 29px;
+            margin-right: 5px; 
+            width: 29px;
+            height: 29px;
+            line-height: 29px;
+            vertical-align: top;
+            font-size: 20px;
+            color: #fff;
+            background: rgb(246, 92, 2);
+          }
           .tel {
             display: inline-block;
+            flex: 1;
             height: 25px;
             line-height: 25px;
             border: 2px solid rgb(127, 71, 48);
@@ -108,6 +157,106 @@ export default {
           height: 30px;
           line-height: 30px;
           background: rgb(246, 92, 2);
+          font-size: 15px;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .footer-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 0;
+    text-align: center;
+    .title {
+      font-size: 20px;
+      color: #666;
+    }
+    .prod-wrapper {
+      width: 100%;
+      padding: 20px 0 0;
+      box-sizing: border-box;
+      .prod-one {
+        display: inline-block;
+        margin: 0;
+        padding: 0 15px 15px 0;
+        width: 50%;
+        box-sizing: border-box;
+        .image {
+          width: 100%;
+          height: 140px;
+          background: url('./assets/house.jpg');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .desc {
+          width: 100%;
+          height: 15px;
+          line-height: 15px;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+      .prod-two {
+        display: inline-block;
+        margin: 0;
+        padding: 0 0 15px 15px;
+        width: 50%;
+        box-sizing: border-box;
+        .image {
+          //width: 100%;
+          height: 140px;
+          background: url('./assets/car.jpg');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .desc {
+          width: 100%;
+          height: 15px;
+          line-height: 15px;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+      .prod-three {
+        display: inline-block;
+        margin: 0;
+        padding: 0 15px 15px 0;
+        width: 50%;
+        box-sizing: border-box;
+        .image {
+          width: 100%;
+          height: 140px;
+          background: url('./assets/credit.jpg');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .desc {
+          width: 100%;
+          height: 15px;
+          line-height: 15px;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+      .prod-four {
+        display: inline-block;
+        margin: 0;
+        padding: 0 0 15px 15px;
+        width: 50%;
+        box-sizing: border-box;
+        .image {
+          //width: 100%;
+          height: 140px;
+          background: url('./assets/small.jpg');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .desc {
+          width: 100%;
+          height: 15px;
+          line-height: 15px;
+          text-align: center;
           font-size: 15px;
         }
       }
