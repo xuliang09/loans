@@ -10,13 +10,13 @@
         <div class="form">
           <div class="name-wrapper">
             <span class="name-icon icon-user"></span>
-            <input class="name" placeholder="请输入您的姓名"/>
+            <input class="name" placeholder="请输入您的姓名" v-model="user.name"/>
           </div>
           <div class="tel-wrapper">
             <span class="tel-icon icon-mobile"></span>
-            <input class="tel" placeholder="请输入您的手机号码"/>
+            <input class="tel" type="tel" placeholder="请输入您的手机号码" v-model="user.tel"/>
           </div>
-          <div class="apply">立即申请</div>
+          <div class="apply" @click="showInfoForm">立即申请</div>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
         </span>
       </div>
     </div>
-    <userInfo v-show="infoFormShow"></userInfo>
+    <userInfo v-if="infoFormShow" :user="this.user"></userInfo>
   </div>
 
 </template>
@@ -54,9 +54,27 @@ export default {
     return {
       user: {
         name: '',
-        tel: 13000000000
+        tel: '',
+        work: '',
+        credit: '',
+        house: '',
+        houseType: '',
+        car: ''
       },
-      infoFormShow: true
+      infoFormShow: false
+    }
+  },
+  methods: {
+    showInfoForm () {
+      if (this.user.name && this.user.tel) {
+        if (this.user.tel.length === 11) {
+          this.infoFormShow = true
+        } else {
+          alert('请输入正确的手机号码')
+        }
+      } else {
+        alert('请输入完整的信息')
+      }
     }
   },
   components: {
