@@ -42,10 +42,8 @@ public class MainController
     }
 
     // 添加用户
-    // companyindividualorofficeworker变量表明是企业、个人用户还是上班族
     @RequestMapping(value = "/adduser", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody String addUser(
-            @RequestParam(value = "companyOrIndividualOrOfficeWorker", required = false) String companyOrIndividualOrOfficeWorker,
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
             @RequestParam(value = "demandMoney", required = false) String demandMoney,
@@ -76,14 +74,14 @@ public class MainController
             HttpServletRequest request, HttpServletResponse response)
     {
         Map<String, String> result = new HashMap<String, String>();
-        if (companyOrIndividualOrOfficeWorker.equals("companyindividual"))
+        if (work.equals("companyindividual"))
         {
             CompanyOrIndividual user = new CompanyOrIndividual();
             // TODO: 组装user
             userInfoManage.addUser(user);
             result.put("state", "0");
         }
-        else if (companyOrIndividualOrOfficeWorker.equals("officeworker"))
+        else if (work.equals("officeworker"))
         {
             OfficeWorker user = new OfficeWorker();
             // TODO: 组装user
