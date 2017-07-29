@@ -20,4 +20,12 @@
 	<bean id="UserInfoManage" class="com.loans.service.impl.UserInfoManageImpl">
 	</bean>
 	
+	<bean id="CloudMessage" class="com.loans.sms.CloudMessage">
+		<property name="product" value="${sms.product}" />
+		<property name="domain" value="${sms.domain}" />
+		<property name="accessKeyId" value="${sms.accessKeyId}" />
+		<property name="accessKeySecret" value="${sms.accessKeySecret}" />
+		<property name="phoneNumber" value="${sms.phoneNumber}" />
+	</bean>
+	
 </beans>
