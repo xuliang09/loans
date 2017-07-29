@@ -14,7 +14,7 @@
           </div>
           <div class="tel-wrapper">
             <span class="tel-icon icon-mobile"></span>
-            <input class="tel" type="tel" placeholder="请输入您的手机号码" v-model="user.tel"/>
+            <input class="tel" type="tel" placeholder="请输入您的手机号码" v-model="user.phoneNumber"/>
           </div>
           <div class="apply" @click="showInfoForm">立即申请</div>
         </div>
@@ -54,20 +54,40 @@ export default {
     return {
       user: {
         name: '',
-        tel: '',
+        phoneNumber: '',
+        demandMoney: '',
+        loanPeriod: '',
+        address: '',
         work: '',
         credit: '',
-        house: '',
+        hasHouse: '',
         houseType: '',
-        car: ''
+        houseProperty: '',
+        houseState: '',
+        hasCar: '',
+        carLicenseBelong: '',
+        carPrice: '',
+        carAge: '',
+        hasLoanOnCar: '',
+        monthlySalary: '',
+        provideIncomeProof: '',
+        workTimeInCurrentCompany: '',
+        workplace: '',
+        publicFundOfSocialSecurity: '',
+        continuedPayTimeOfSocialSecurityPublicFund: '',
+        legalRepresentative: '',
+        companyOpearteState: '',
+        businessLicenseAge: '',
+        publicAccountMonthly: '',
+        privateAccountMonthly: ''
       },
       infoFormShow: false
     }
   },
   methods: {
     showInfoForm () {
-      if (this.user.name && this.user.tel) {
-        if (this.user.tel.length === 11) {
+      if (this.user.name && this.user.phoneNumber) {
+        if (this.user.phoneNumber.length === 11) {
           this.infoFormShow = true
         } else {
           alert('请输入正确的手机号码')

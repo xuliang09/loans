@@ -39,7 +39,7 @@
           </div>
           <div class="company-opearte-state-wrapper">
             <span class="text">企业是否正常运营：</span>
-            <select class="company-opearte-state" v-model="user.companyOopearteState">
+            <select class="company-opearte-state" v-model="user.companyOpearteState">
               <option selected value="yes">是</option>
               <option value="no">否</option>
             </select>
@@ -75,7 +75,7 @@
           </div>
           <div class="work-time-wrapper">
             <span class="text">现单位工作时间：</span>
-            <input class="work-time" v-model="user.workTime"/>
+            <input class="work-time" v-model="user.workTimeInCurrentCompany"/>
             <select class="work-time-unit">
               <option value="month">月</option>
               <option selected value="year">年</option>
@@ -87,14 +87,14 @@
           </div>
           <div class="social-security-wrapper">
             <span class="text">有无社保公积金：</span>
-            <select class="social-security" v-model="user.socialSecurity">
+            <select class="social-security" v-model="user.publicFundOfSocialSecurity">
               <option selected value="yes">有</option>
               <option value="no">无</option>
             </select>
           </div>
           <div class="pay-time-wrapper">
             <span class="text">社保公积金连续缴纳时间：</span>
-            <input class="pay-time" v-model="user.payTime"/>
+            <input class="pay-time" v-model="user.continuedPayTimeOfSocialSecurityPublicFund"/>
             <select class="pay-time-unit">
               <option value="month">月</option>
               <option selected value="year">年</option>
@@ -104,21 +104,12 @@
       </div>
       <div class="user-info">
         <div class="credit-wrapper">
-          <span class="text">近半年有无逾期：</span>
-          <select class="credit" v-model="user.credit">
-            <option value="yes">有</option>
-            <option value="no">无</option>
-          </select>
-          <input class="credit-time" v-if="user.credit === 'yes'"/>
-          <select class="credit-time-unit" v-if="user.credit === 'yes'">
-            <option selected value="day">天</option>
-            <option value="month">月</option>
-            <option value="year">年</option>
-          </select>
+          <span class="text">近半年有无逾期（最长逾期时间）：</span>
+          <input class="credit-time" v-model="user.credit"/>
         </div>
         <div class="house-wrapper">
           <span class="text">本人名下是否有房产：</span>
-          <select class="house" v-model="user.house">
+          <select class="house" v-model="user.hasHouse">
             <option selected value="yes">有</option>
             <option value="no">无</option>
           </select>
@@ -148,14 +139,14 @@
         
         <div class="car-wrapper">
           <span class="text">本人名下有无车产：</span>
-          <select class="car" v-model="user.car">
+          <select class="car" v-model="user.hasCar">
             <option selected value="yes">有</option>
             <option value="no">无</option>
           </select>
         </div>
         <div class="car-license-wrapper" v-if="user.car === 'yes'">
           <span class="text">牌照归属地：</span>
-          <input class="car-license" placeholder="省 - 市" v-model="user.carLicense"/>
+          <input class="car-license" placeholder="省 - 市" v-model="user.carLicenseBelong"/>
         </div>
         <div class="car-price-wrapper" v-if="user.car === 'yes'">
           <span class="text">车辆购买价格：</span>
@@ -172,7 +163,7 @@
         </div>
         <div class="car-loan-wrapper" v-if="user.car === 'yes'">
           <span class="text">车辆有无贷款：</span>
-          <select class="car-loan" v-model="user.carLoan">
+          <select class="car-loan" v-model="user.hasLoanOnCar">
             <option value="yes">有</option>
             <option selected value="no">无</option>
           </select>
@@ -183,6 +174,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   props: {
     user: {
@@ -191,10 +183,16 @@ export default {
   },
   methods: {
     submitInfo () {
-      console.log(this.user)
+      console.log(JSON.stringify(this.user))
+      axios({
+        method: 'post',
+        url: './addUser',
+        data: {
+          JSON: JSON.stringify(this.user)
+        }
+      })
     }
   }
-
 }
 </script>
 
