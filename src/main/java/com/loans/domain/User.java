@@ -1,8 +1,12 @@
 package com.loans.domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 
-public abstract class User
+public abstract class User implements Comparable<User>
 {
     // id
     @Id
@@ -245,5 +249,24 @@ public abstract class User
     public void setHasLoanOnCar(String hasLoanOnCar)
     {
         this.hasLoanOnCar = hasLoanOnCar;
+    }
+    
+    public int compareTo(User other)
+    {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        try
+        {
+            Date data = df.parse(this.createDate);
+            Date otherDate = df.parse(other.createDate);
+            
+            return data.compareTo(otherDate);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+            return 0;
+        }
+        
     }
 }
