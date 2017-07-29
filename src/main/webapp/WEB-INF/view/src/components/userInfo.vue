@@ -183,13 +183,15 @@ export default {
   },
   methods: {
     submitInfo () {
-      console.log(JSON.stringify(this.user))
+      console.log(this.user)
       axios({
         method: 'post',
         url: './adduser',
-        data: {
-          JSON: JSON.stringify(this.user)
-        }
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        data: JSON.stringify(this.user)
       })
     }
   }
