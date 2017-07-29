@@ -9,11 +9,6 @@
         <div class="loan-period-wrapper">
           <span class="text">贷款周期：</span>
           <input class="loan-period" v-model="user.loanPeriod"/>
-          <select class="loan-period-unit">
-            <option selected value="day">天</option>
-            <option value="month">月</option>
-            <option value="year">年</option>
-          </select>
         </div>
         <div class="address-wrapper">
           <span class="text">户籍：</span>
@@ -21,7 +16,7 @@
         </div>
         <div class="work-wrapper">
           <span class="text">工作：</span>
-          <select class="work" v-model="user.work">
+          <select class="work" v-model="user.work" @change="changeWork">
             <option value="company">企业主</option>
             <option value="individual">个体户</option>
             <option value="officeWork">上班</option>
@@ -76,10 +71,6 @@
           <div class="work-time-wrapper">
             <span class="text">现单位工作时间：</span>
             <input class="work-time" v-model="user.workTimeInCurrentCompany"/>
-            <select class="work-time-unit">
-              <option value="month">月</option>
-              <option selected value="year">年</option>
-            </select>
           </div>
           <div class="workplace-wrapper">
             <span class="text">工作所在地：</span>
@@ -92,13 +83,9 @@
               <option value="no">无</option>
             </select>
           </div>
-          <div class="pay-time-wrapper">
+          <div class="pay-time-wrapper" v-if="user.publicFundOfSocialSecurity === 'yes'">
             <span class="text">社保公积金连续缴纳时间：</span>
             <input class="pay-time" v-model="user.continuedPayTimeOfSocialSecurityPublicFund"/>
-            <select class="pay-time-unit">
-              <option value="month">月</option>
-              <option selected value="year">年</option>
-            </select>
           </div>
         </div>
       </div>
@@ -109,38 +96,37 @@
         </div>
         <div class="house-wrapper">
           <span class="text">本人名下是否有房产：</span>
-          <select class="house" v-model="user.hasHouse">
-            <option selected value="yes">有</option>
+          <select class="house" v-model="user.hasHouse" @change="changeHouse">
+            <option value="yes">有</option>
             <option value="no">无</option>
           </select>
-          <div class="house-type-wrapper" v-if="user.hasHouse === 'yes'">
-            <span class="text">房产类型：</span>
-            <select class="house-type" v-model="user.houseType">
-              <option value="shop">商铺</option>
-              <option value="villa">别墅</option>
-              <option value="house">住宅</option>
-            </select>
-          </div>
-          <div class="house-property-wrapper" v-if="user.houseType === 'house' && user.hasHouse === 'yes'">
-            <span class="text">房产性质：</span>
-            <select class="house-property" v-model="user.houseProperty">
-              <option selected value="commercial">商品房</option>
-              <option value="indemnificatory">保障性住房</option>
-            </select>
-          </div>
-          <div class="house-state-wrapper" v-if="user.hasHouse === 'yes'">
-            <span class="text">房产状态：</span>
-            <select class="house-state" v-model="user.houseState">
-              <option selected value="full">全款</option>
-              <option value="mortgage">按揭</option>
-            </select>
-          </div>
         </div>
-        
+        <div class="house-type-wrapper" v-if="user.hasHouse === 'yes'">
+          <span class="text">房产类型：</span>
+          <select class="house-type" v-model="user.houseType" @change="changeHouseType">
+            <option value="shop">商铺</option>
+            <option value="villa">别墅</option>
+            <option value="house">住宅</option>
+          </select>
+        </div>
+        <div class="house-property-wrapper" v-if="user.houseType === 'house' && user.hasHouse === 'yes'">
+          <span class="text">房产性质：</span>
+          <select class="house-property" v-model="user.houseProperty">
+            <option value="commercial">商品房</option>
+            <option value="indemnificatory">保障性住房</option>
+          </select>
+        </div>
+        <div class="house-state-wrapper" v-if="user.hasHouse === 'yes'">
+          <span class="text">房产状态：</span>
+          <select class="house-state" v-model="user.houseState">
+            <option value="full">全款</option>
+            <option value="mortgage">按揭</option>
+          </select>
+        </div>
         <div class="car-wrapper">
           <span class="text">本人名下有无车产：</span>
-          <select class="car" v-model="user.hasCar">
-            <option selected value="yes">有</option>
+          <select class="car" v-model="user.hasCar" @change="changeCar">
+            <option value="yes">有</option>
             <option value="no">无</option>
           </select>
         </div>
@@ -156,16 +142,12 @@
         <div class="car-age-wrapper" v-if="user.hasCar === 'yes'">
           <span class="text">车龄：</span>
           <input class="car-age" v-model="user.carAge"/>
-          <select class="car-age-unit">
-            <option selected value="month">月</option>
-            <option value="year">年</option>
-          </select>
         </div>
         <div class="car-loan-wrapper" v-if="user.hasCar === 'yes'">
           <span class="text">车辆有无贷款：</span>
           <select class="car-loan" v-model="user.hasLoanOnCar">
             <option value="yes">有</option>
-            <option selected value="no">无</option>
+            <option value="no">无</option>
           </select>
         </div>
       </div>
@@ -191,6 +173,34 @@ export default {
           JSON: JSON.stringify(this.user)
         }
       })
+    },
+    changeWork () {
+      this.user.legalRepresentative = ''
+      this.user.companyOpearteState = ''
+      this.user.businessLicenseAge = ''
+      this.user.publicAccountMonthly = ''
+      this.user.privateAccountMonthly = ''
+      this.user.monthlySalary = ''
+      this.user.provideIncomeProof = ''
+      this.user.workTimeInCurrentCompany = ''
+      this.user.workplace = ''
+      this.user.publicFundOfSocialSecurity = ''
+      this.user.continuedPayTimeOfSocialSecurityPublicFund = ''
+    },
+    changeHouse () {
+      this.user.houseType = ''
+      this.user.houseProperty = ''
+      this.user.houseState = ''
+    },
+    changeHouseType () {
+      this.user.houseProperty = ''
+      this.user.houseState = ''
+    },
+    changeCar () {
+      this.user.carLicenseBelong = ''
+      this.user.carPrice = ''
+      this.user.carAge = ''
+      this.user.hasLoanOnCar = ''
     }
   }
 }
@@ -199,18 +209,336 @@ export default {
 <style lang="less">
   .info {
     // width: 100%;
-    margin: 10px 10px;
+    margin: 10px;
     .main-info {
       width: 100%;
       margin: 20px 0;
+      .demand-money-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 80px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .demand-money {
+          display: inline-block;
+          flex: 1;
+          margin: 0 10px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+        .demand-money-unit {
+          display: inline-block;
+          flex: 0 0 16px;
+          height: 21px;
+          line-height: 21px;
+        }
+      }
+      .loan-period-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 80px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .loan-period {
+          display: inline-block;
+          flex: 1;
+          margin-left: 10px;
+          margin-right: 26px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+      }
+      .address-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 80px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .address {
+          display: inline-block;
+          flex: 1;
+          margin-left: 10px;
+          margin-right: 26px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+      }
+      .work-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 80px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .work {
+          display: inline-block;
+          flex: 1;
+          height: 21px;
+          line-height: 21px;
+          margin-left: 10px;
+          margin-right: 26px;
+        }
+      }
     }
     .identity-info {
       width: 100%;
-      margin: 20px 0; 
+      margin: 20px 0;
+      .legal-representative-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 144px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .legal-representative {
+          display: inline-block;
+          flex: 1;
+          height: 21px;
+          line-height: 21px;
+          margin-left: 10px;
+          margin-right: 26px;
+        }
+      }
+      .company-opearte-state-wrapper {
+        .legal-representative-wrapper;
+        .company-opearte-state {
+          .legal-representative;
+        }
+      }
+      .business-license-age-wrapper {
+        .legal-representative-wrapper;
+        .business-license-age {
+          display: inline-block;
+          flex: 1;
+          margin: 0 10px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+        .business-license-age-unit {
+          display: inline-block;
+          flex: 0 0 16px;
+          height: 21px;
+          line-height: 21px;
+        }
+      }
+      .public-account-monthly-wrapper {
+        .business-license-age-wrapper;
+        .public-account-monthly {
+          .business-license-age;
+        }
+        .public-account-monthly-unit {
+          .business-license-age-unit;
+        }
+      }
+      .private-account-monthly-wrapper {
+        .business-license-age-wrapper;
+        .private-account-monthly {
+          .business-license-age;
+        }
+        .private-account-monthly-unit {
+          .business-license-age-unit;
+        }
+      }
+      .monthly-salary-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 192px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .monthly-salary {
+          display: inline-block;
+          flex: 1;
+          margin: 0 10px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+        .monthly-salary-unit {
+          display: inline-block;
+          flex: 0 0 16px;
+          height: 21px;
+          line-height: 21px;
+        }
+      }
+      .provide-income-proof-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 192px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .provide-income-proof {
+          display: inline-block;
+          flex: 1;
+          height: 21px;
+          line-height: 21px;
+          margin-left: 10px;
+          margin-right: 26px;
+        }
+      }
+      .work-time-wrapper {
+        .monthly-salary-wrapper;
+        .work-time {
+          display: inline-block;
+          flex: 1;
+          margin-left: 10px;
+          margin-right: 26px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+      }
+      .workplace-wrapper {
+        .work-time-wrapper;
+        .workplace {
+          .work-time;
+        }
+      }
+      .social-security-wrapper {
+        .provide-income-proof-wrapper;
+        .social-security {
+          .provide-income-proof;
+        }
+      }
+      .pay-time-wrapper {
+        .work-time-wrapper;
+        .pay-time {
+          .work-time;
+        }
+      }
     }
     .user-info {
       width: 100%;
-      margin: 20px 0; 
+      margin: 20px 0;
+      .credit-wrapper {
+        margin: 10px 0;
+        flex-wrap: wrap;
+        display: flex;
+        .text {
+          width: 100%;
+          height: 21px;
+          line-height: 21px;
+        }
+        .credit-time {
+          flex: 1;
+          margin: 5px 26px 0 90px;
+          overflow: hidden;
+        }
+      }
+      .house-wrapper {
+        display: flex;
+        margin: 10px 0;
+        .text {
+          display: inline-block;
+          flex: 0 0 160px;
+          height: 21px;
+          line-height: 21px;
+        }
+        .house {
+          display: inline-block;
+          flex: 1;
+          height: 21px;
+          line-height: 21px;
+          margin-left: 10px;
+          margin-right: 26px;
+        }
+      }
+      .house-type-wrapper {
+        .house-wrapper;
+        .house-type {
+          .house;
+        }
+      }
+      .house-property-wrapper {
+        .house-wrapper;
+        .house-property {
+          .house;
+        }
+      }
+      .house-state-wrapper {
+        .house-wrapper;
+        .house-state {
+          .house;
+        }
+      }
+      .car-wrapper {
+        .house-wrapper;
+        .car {
+          .house;
+        }
+      }
+      .car-license-wrapper {
+        .house-wrapper;
+        .car-license {
+          display: inline-block;
+          flex: 1;
+          margin: 0 26px 0 10px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+      }
+      .car-price-wrapper {
+        .house-wrapper;
+        .car-price {
+          display: inline-block;
+          flex: 1;
+          margin: 0 10px;
+          height: 17px;
+          line-height: 17px;
+          overflow: hidden;
+        }
+        .car-price-unit {
+          display: inline-block;
+          flex: 0 0 16px;
+          height: 21px;
+          line-height: 21px;
+        }
+      }
+      .car-age-wrapper {
+        .car-license-wrapper;
+        .car-age {
+          .car-license;
+        }
+      }
+      .car-loan-wrapper {
+        .house-wrapper;
+        .car-loan {
+          .house;
+        }
+      }
+    }
+    .submit {
+      margin: 20px 0 0;
+      height: 30px;
+      line-height: 30px;
+      background: rgb(246, 92, 2);
+      font-size: 15px;
+      text-align: center;
+      color: #fff;
+      letter-spacing: 2px;
     }
   }
 </style>
