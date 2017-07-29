@@ -113,7 +113,7 @@
             <option selected value="yes">有</option>
             <option value="no">无</option>
           </select>
-          <div class="house-type-wrapper" v-if="user.house === 'yes'">
+          <div class="house-type-wrapper" v-if="user.hasHouse === 'yes'">
             <span class="text">房产类型：</span>
             <select class="house-type" v-model="user.houseType">
               <option value="shop">商铺</option>
@@ -121,14 +121,14 @@
               <option value="house">住宅</option>
             </select>
           </div>
-          <div class="house-property-wrapper" v-if="user.houseType === 'house' && user.house === 'yes'">
+          <div class="house-property-wrapper" v-if="user.houseType === 'house' && user.hasHouse === 'yes'">
             <span class="text">房产性质：</span>
             <select class="house-property" v-model="user.houseProperty">
               <option selected value="commercial">商品房</option>
               <option value="indemnificatory">保障性住房</option>
             </select>
           </div>
-          <div class="house-state-wrapper" v-if="user.house === 'yes'">
+          <div class="house-state-wrapper" v-if="user.hasHouse === 'yes'">
             <span class="text">房产状态：</span>
             <select class="house-state" v-model="user.houseState">
               <option selected value="full">全款</option>
@@ -144,16 +144,16 @@
             <option value="no">无</option>
           </select>
         </div>
-        <div class="car-license-wrapper" v-if="user.car === 'yes'">
+        <div class="car-license-wrapper" v-if="user.hasCar === 'yes'">
           <span class="text">牌照归属地：</span>
           <input class="car-license" placeholder="省 - 市" v-model="user.carLicenseBelong"/>
         </div>
-        <div class="car-price-wrapper" v-if="user.car === 'yes'">
+        <div class="car-price-wrapper" v-if="user.hasCar === 'yes'">
           <span class="text">车辆购买价格：</span>
           <input class="car-price" v-model="user.carPrice"/>
           <span class="car-price-unit">元</span>
         </div>
-        <div class="car-age-wrapper" v-if="user.car === 'yes'">
+        <div class="car-age-wrapper" v-if="user.hasCar === 'yes'">
           <span class="text">车龄：</span>
           <input class="car-age" v-model="user.carAge"/>
           <select class="car-age-unit">
@@ -161,7 +161,7 @@
             <option value="year">年</option>
           </select>
         </div>
-        <div class="car-loan-wrapper" v-if="user.car === 'yes'">
+        <div class="car-loan-wrapper" v-if="user.hasCar === 'yes'">
           <span class="text">车辆有无贷款：</span>
           <select class="car-loan" v-model="user.hasLoanOnCar">
             <option value="yes">有</option>
