@@ -186,7 +186,7 @@ export default {
       console.log(JSON.stringify(this.user))
       axios({
         method: 'post',
-        url: './addUser',
+        url: './adduser',
         data: {
           JSON: JSON.stringify(this.user)
         }
