@@ -104,6 +104,9 @@ export default {
 </script>
 
 <style lang="less">
+  .app {
+    position: relative;
+  }
   .content-wrapper {
     width: 100%;
     height: 400px;
@@ -112,6 +115,20 @@ export default {
     // background-size: 100%;
     // background-repeat: no-repeat;
     text-align: center;
+    &:before {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: url('./assets/bg_img.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: -1;
+      opacity: 0.5;
+    }
     .title {
       font-size: 0;
       .title-one {

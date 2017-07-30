@@ -210,14 +210,30 @@ export default {
 
 <style lang="less">
   .info {
+    &:before {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: url('../assets/bg_img.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: -1;
+      opacity: 0.5;
+    }
     // width: 100%;
     margin: 10px;
+    margin-top: 0;
     .main-info {
       width: 100%;
-      margin: 20px 0;
+      margin: 0 0 20px;
+      padding-top: 20px;
       .demand-money-wrapper {
         display: flex;
-        margin: 10px 0;
+        margin: 0 0 10px;
         .text {
           display: inline-block;
           flex: 0 0 80px;
