@@ -42,7 +42,7 @@ public class MainController
     @Autowired
     CloudMessage cloudMessage;
 
-    // 判断连通
+    // 网站主页
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index()
     {
@@ -116,43 +116,43 @@ public class MainController
         User user = userList.get(0);
 
         StringBuilder res = new StringBuilder();
-        res.append("姓名: " + user.getName() + "\n");
-        res.append("手机号: " + user.getPhoneNumber() + "\n");
-        res.append("需求金额: " + user.getDemandMoney() + "\n");
-        res.append("贷款周期: " + user.getLoanPeriod() + "\n");
-        res.append("户籍: " + user.getAddress() + "\n");
-        res.append("工作: " + user.getWork() + "\n");
-        res.append("信用状况: " + user.getCredit() + "\n");
-        res.append("房产: " + user.getHasHouse() + "\n");
-        res.append("房产类型: " + user.getHouseType() + "\n");
-        res.append("房产性质: " + user.getHouseProperty() + "\n");
-        res.append("房产状态: " + user.getHouseState() + "\n");
-        res.append("有无车产: " + user.getHasCar() + "\n");
-        res.append("车牌照归属地: " + user.getCarLicenseBelong() + "\n");
-        res.append("车辆购买价格: " + user.getCarPrice() + "\n");
-        res.append("车龄: " + user.getCarAge() + "\n");
-        res.append("车辆是否贷款: " + user.getHasLoanOnCar() + "\n");
+        res.append("姓名:  " + user.getName() + "\n");
+        res.append("手机号:  " + user.getPhoneNumber() + "\n");
+        res.append("需求金额:  " + user.getDemandMoney() + "\n");
+        res.append("贷款周期:  " + user.getLoanPeriod() + "\n");
+        res.append("户籍:  " + user.getAddress() + "\n");
+        res.append("工作:  " + user.getWork() + "\n");
+        res.append("近半年有无逾期（最长逾期时间）:  " + user.getCredit() + "\n");
+        res.append("房产:  " + user.getHasHouse() + "\n");
+        res.append("房产类型:  " + user.getHouseType() + "\n");
+        res.append("房产性质:  " + user.getHouseProperty() + "\n");
+        res.append("房产状态:  " + user.getHouseState() + "\n");
+        res.append("有无车产:  " + user.getHasCar() + "\n");
+        res.append("车牌照归属地:  " + user.getCarLicenseBelong() + "\n");
+        res.append("车辆购买价格:  " + user.getCarPrice() + "\n");
+        res.append("车龄：  " + user.getCarAge() + "\n");
+        res.append("车辆是否贷款:  " + user.getHasLoanOnCar() + "\n");
 
         if (user instanceof CompanyOrIndividual)
         {
             CompanyOrIndividual user1 = (CompanyOrIndividual) user;
-            res.append("是否法人代表: " + user1.getLegalRepresentative() + "\n");
-            res.append("企业是否正常运营: " + user1.getCompanyOpearteState() + "\n");
-            res.append("营业执照年限: " + user1.getBusinessLicenseAge() + "\n");
-            res.append("月对公流水: " + user1.getPublicAccountMonthly() + "\n");
-            res.append("月对私流水: " + user1.getPrivateAccountMonthly() + "\n");
+            res.append("是否法人代表:  " + user1.getLegalRepresentative() + "\n");
+            res.append("企业是否正常运营:  " + user1.getCompanyOpearteState() + "\n");
+            res.append("营业执照年限:  " + user1.getBusinessLicenseAge() + "\n");
+            res.append("月对公流水:  " + user1.getPublicAccountMonthly() + "\n");
+            res.append("月对私流水:  " + user1.getPrivateAccountMonthly() + "\n");
         }
         else if (user instanceof OfficeWorker)
         {
             OfficeWorker user1 = (OfficeWorker) user;
-            res.append("月打卡工资: " + user1.getMonthlySalary() + "\n");
-            res.append("能否提供收入证明: " + user1.getProvideIncomeProof() + "\n");
+            res.append("月打卡工资:  " + user1.getMonthlySalary() + "\n");
+            res.append("能否提供收入证明:  " + user1.getProvideIncomeProof() + "\n");
             res.append(
-                    "现单位工作时间: " + user1.getWorkTimeInCurrentCompany() + "\n");
-            res.append("工作所在地: " + user1.getWorkplace() + "\n");
-            res.append(
-                    "有无社保公积金: " + user1.getPublicFundOfSocialSecurity() + "\n");
-            res.append("社保公积金连续缴纳时间: "
+                    "现单位工作时间:  " + user1.getWorkTimeInCurrentCompany() + "\n");
+            res.append("工作所在地:  " + user1.getWorkplace() + "\n");
+            res.append("有无社保公积金:  " + user1.getPublicFundOfSocialSecurity()
+                    + "\n");
+            res.append("社保公积金连续缴纳时间:  "
                     + user1.getContinuedPayTimeOfSocialSecurityPublicFund()
                     + "\n");
         }
@@ -166,7 +166,6 @@ public class MainController
     // 添加用户
     @RequestMapping(value = "/adduser", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody String addUser(@RequestBody Map<String, String> map,
-
             HttpServletRequest request, HttpServletResponse response)
             throws Exception
     {
@@ -201,7 +200,7 @@ public class MainController
         String privateAccountMonthly = map.get("privateAccountMonthly");
 
         Map<String, String> result = new HashMap<String, String>();
-        if (work.equals("company") || work.equals("individual"))
+        if (work.equals("企业主") || work.equals("个体户"))
         {
             CompanyOrIndividual user = new CompanyOrIndividual();
             user.setName(name);
@@ -231,7 +230,7 @@ public class MainController
             cloudMessage.sendSms(name, phoneNumber);
             result.put("state", "200");
         }
-        else if (work.equals("officeWork"))
+        else if (work.equals("上班族"))
         {
             OfficeWorker user = new OfficeWorker();
             user.setName(name);

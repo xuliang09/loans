@@ -19,7 +19,7 @@
           <select class="work" v-model="user.work" @change="changeWork">
             <option value="企业主">企业主</option>
             <option value="个体户">个体户</option>
-            <option value="上班">上班</option>
+            <option value="上班族">上班族</option>
           </select>
         </div>
       </div>
@@ -55,7 +55,7 @@
             <span class="private-account-monthly-unit">元</span>
           </div>
         </div>
-        <div class="worker-wrapper" v-if="user.work === '上班'">
+        <div class="worker-wrapper" v-if="user.work === '上班族'">
           <div class="monthly-salary-wrapper">
             <span class="text">月打卡工资：</span>
             <input class="monthly-salary" v-model="user.monthlySalary"/>
