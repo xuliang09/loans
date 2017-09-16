@@ -17,14 +17,14 @@
         <div class="work-wrapper">
           <span class="text">工作：</span>
           <select class="work" v-model="user.work" @change="changeWork">
-            <option value="company">企业主</option>
-            <option value="individual">个体户</option>
-            <option value="officeWork">上班</option>
+            <option value="企业主">企业主</option>
+            <option value="个体户">个体户</option>
+            <option value="上班">上班</option>
           </select>
         </div>
       </div>
       <div class="identity-info">
-        <div class="company-wrapper" v-if="user.work === 'company' || user.work === 'individual'">
+        <div class="company-wrapper" v-if="user.work === '企业主' || user.work === '个体户'">
           <div class="legal-representative-wrapper">
             <span class="text">是否法人代表：</span>
             <select class="legal-representative" v-model="user.legalRepresentative">
@@ -55,7 +55,7 @@
             <span class="private-account-monthly-unit">元</span>
           </div>
         </div>
-        <div class="worker-wrapper" v-if="user.work === 'officeWork'">
+        <div class="worker-wrapper" v-if="user.work === '上班'">
           <div class="monthly-salary-wrapper">
             <span class="text">月打卡工资：</span>
             <input class="monthly-salary" v-model="user.monthlySalary"/>
@@ -104,23 +104,23 @@
         <div class="house-type-wrapper" v-if="user.hasHouse === '有'">
           <span class="text">房产类型：</span>
           <select class="house-type" v-model="user.houseType" @change="changeHouseType">
-            <option value="shop">商铺</option>
-            <option value="villa">别墅</option>
-            <option value="house">住宅</option>
+            <option value="商铺">商铺</option>
+            <option value="别墅">别墅</option>
+            <option value="住宅">住宅</option>
           </select>
         </div>
-        <div class="house-property-wrapper" v-if="user.houseType === 'house' && user.hasHouse === '有'">
+        <div class="house-property-wrapper" v-if="user.houseType === '住宅' && user.hasHouse === '有'">
           <span class="text">房产性质：</span>
           <select class="house-property" v-model="user.houseProperty">
-            <option value="commercial">商品房</option>
-            <option value="indemnificatory">保障性住房</option>
+            <option value="商品房">商品房</option>
+            <option value="保障性住房">保障性住房</option>
           </select>
         </div>
         <div class="house-state-wrapper" v-if="user.hasHouse === '有'">
           <span class="text">房产状态：</span>
           <select class="house-state" v-model="user.houseState">
-            <option value="full">全款</option>
-            <option value="mortgage">按揭</option>
+            <option value="全款">全款</option>
+            <option value="按揭">按揭</option>
           </select>
         </div>
         <div class="car-wrapper">
