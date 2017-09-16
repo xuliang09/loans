@@ -28,15 +28,15 @@
           <div class="legal-representative-wrapper">
             <span class="text">是否法人代表：</span>
             <select class="legal-representative" v-model="user.legalRepresentative">
-              <option selected value="yes">是</option>
-              <option value="no">否</option>
+              <option selected value="是">是</option>
+              <option value="否">否</option>
             </select>
           </div>
           <div class="company-opearte-state-wrapper">
             <span class="text">企业是否正常运营：</span>
             <select class="company-opearte-state" v-model="user.companyOpearteState">
-              <option selected value="yes">是</option>
-              <option value="no">否</option>
+              <option selected value="是">是</option>
+              <option value="否">否</option>
             </select>
           </div>
           <div class="business-license-age-wrapper">
@@ -64,8 +64,8 @@
           <div class="provide-income-proof-wrapper">
             <span class="text">能否提供收入证明：</span>
             <select class="provide-income-proof" v-model="user.provideIncomeProof">
-              <option selected value="yes">是</option>
-              <option value="no">否</option>
+              <option selected value="是">是</option>
+              <option value="否">否</option>
             </select>
           </div>
           <div class="work-time-wrapper">
@@ -79,11 +79,11 @@
           <div class="social-security-wrapper">
             <span class="text">有无社保公积金：</span>
             <select class="social-security" v-model="user.publicFundOfSocialSecurity">
-              <option selected value="yes">有</option>
-              <option value="no">无</option>
+              <option selected value="有">有</option>
+              <option value="无">无</option>
             </select>
           </div>
-          <div class="pay-time-wrapper" v-if="user.publicFundOfSocialSecurity === 'yes'">
+          <div class="pay-time-wrapper" v-if="user.publicFundOfSocialSecurity === '有'">
             <span class="text">社保公积金连续缴纳时间：</span>
             <input class="pay-time" v-model="user.continuedPayTimeOfSocialSecurityPublicFund"/>
           </div>
@@ -97,11 +97,11 @@
         <div class="house-wrapper">
           <span class="text">本人名下是否有房产：</span>
           <select class="house" v-model="user.hasHouse" @change="changeHouse">
-            <option value="yes">有</option>
-            <option value="no">无</option>
+            <option value="有">有</option>
+            <option value="无">无</option>
           </select>
         </div>
-        <div class="house-type-wrapper" v-if="user.hasHouse === 'yes'">
+        <div class="house-type-wrapper" v-if="user.hasHouse === '有'">
           <span class="text">房产类型：</span>
           <select class="house-type" v-model="user.houseType" @change="changeHouseType">
             <option value="shop">商铺</option>
@@ -109,14 +109,14 @@
             <option value="house">住宅</option>
           </select>
         </div>
-        <div class="house-property-wrapper" v-if="user.houseType === 'house' && user.hasHouse === 'yes'">
+        <div class="house-property-wrapper" v-if="user.houseType === 'house' && user.hasHouse === '有'">
           <span class="text">房产性质：</span>
           <select class="house-property" v-model="user.houseProperty">
             <option value="commercial">商品房</option>
             <option value="indemnificatory">保障性住房</option>
           </select>
         </div>
-        <div class="house-state-wrapper" v-if="user.hasHouse === 'yes'">
+        <div class="house-state-wrapper" v-if="user.hasHouse === '有'">
           <span class="text">房产状态：</span>
           <select class="house-state" v-model="user.houseState">
             <option value="full">全款</option>
@@ -126,32 +126,33 @@
         <div class="car-wrapper">
           <span class="text">本人名下有无车产：</span>
           <select class="car" v-model="user.hasCar" @change="changeCar">
-            <option value="yes">有</option>
-            <option value="no">无</option>
+            <option value="有">有</option>
+            <option value="无">无</option>
           </select>
         </div>
-        <div class="car-license-wrapper" v-if="user.hasCar === 'yes'">
+        <div class="car-license-wrapper" v-if="user.hasCar === '有'">
           <span class="text">牌照归属地：</span>
           <input class="car-license" placeholder="省 - 市" v-model="user.carLicenseBelong"/>
         </div>
-        <div class="car-price-wrapper" v-if="user.hasCar === 'yes'">
+        <div class="car-price-wrapper" v-if="user.hasCar === '有'">
           <span class="text">车辆购买价格：</span>
           <input class="car-price" v-model="user.carPrice"/>
           <span class="car-price-unit">元</span>
         </div>
-        <div class="car-age-wrapper" v-if="user.hasCar === 'yes'">
+        <div class="car-age-wrapper" v-if="user.hasCar === '有'">
           <span class="text">车龄：</span>
           <input class="car-age" v-model="user.carAge"/>
         </div>
-        <div class="car-loan-wrapper" v-if="user.hasCar === 'yes'">
+        <div class="car-loan-wrapper" v-if="user.hasCar === '有'">
           <span class="text">车辆有无贷款：</span>
           <select class="car-loan" v-model="user.hasLoanOnCar">
-            <option value="yes">有</option>
-            <option value="no">无</option>
+            <option value="有">有</option>
+            <option value="无">无</option>
           </select>
         </div>
       </div>
       <div class="submit" @click="submitInfo">确认提交</div>
+      <div class="footer"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=30150089208230730">网站备案号：30150089208230730</a></div>
   </div>
 </template>
 
@@ -165,7 +166,7 @@ export default {
   },
   methods: {
     submitInfo () {
-      console.log(this.user)
+      // console.log(this.user)
       axios({
         method: 'post',
         url: './adduser',
@@ -174,6 +175,15 @@ export default {
           'Content-Type': 'application/json'
         },
         data: JSON.stringify(this.user)
+      }).then(res => {
+        console.log(res)
+        if (res.status === 200) {
+          alert('提交成功！')
+        } else {
+          alert('提交失败，请稍后再试！')
+        }
+      }).catch(() => {
+        alert('提交失败，请稍后再试！')
       })
     },
     changeWork () {
@@ -208,7 +218,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .info {
     &:before {
       display: block;
@@ -557,6 +567,18 @@ export default {
       text-align: center;
       color: #fff;
       letter-spacing: 2px;
+    }
+    .footer {
+      position: absolute;
+      bottom: -100px;
+      left: auto;
+      right: auto;
+      width: 100%;
+      text-align: center;
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
   }
 </style>
