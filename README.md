@@ -7,7 +7,7 @@
 #命令行进入loans\src\main\webapp\WEB-INF\view目录（使用cd命令）
 npm run install #自动安装所有用到的package
 npm run dev #在浏览器中查看效果，这一步可以省略
-npm run build #生成loans\src\main\webapp\WEB-INF\view\build文件夹
+npm run build #生成loans\src\main\webapp\WEB-INF\view\dist 文件夹
 ```
 
 nodejs版本为v8.4.0
