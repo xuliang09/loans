@@ -152,7 +152,7 @@
         </div>
       </div>
       <div class="submit" @click="submitInfo">确认提交</div>
-      <div class="footer"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=30150089208230730">网站备案号：30150089208230730</a></div>
+      <div class="footer"> 网站备案号：苏ICP备17057254号-1 </div>
   </div>
 </template>
 
@@ -575,10 +575,7 @@ export default {
       right: auto;
       width: 100%;
       text-align: center;
-      a {
-        text-decoration: none;
-        color: black;
-      }
+      color: black;
     }
   }
 </style>

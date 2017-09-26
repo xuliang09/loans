@@ -42,7 +42,7 @@
       </div>
     </div>
     <userInfo v-if="infoFormShow" :user="this.user"></userInfo>
-    <div class="footer" v-show="!infoFormShow"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=30150089208230730">网站备案号：30150089208230730</a></div>
+    <div class="footer" v-show="!infoFormShow">网站备案号：苏ICP备17057254号-1 </div>
   </div>
 
 </template>
@@ -331,9 +331,6 @@ export default {
     right: auto;
     width: 100%;
     text-align: center;
-    a {
-      text-decoration: none;
-      color: black;
-    }
+    color: black;
   }
 </style>
