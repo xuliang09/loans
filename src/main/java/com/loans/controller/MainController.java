@@ -36,6 +36,7 @@ import com.loans.service.UserInfoManage;
 @Controller
 public class MainController
 {
+    
     @Autowired
     UserInfoManage userInfoManage;
 
