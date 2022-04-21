@@ -28,4 +28,4 @@ ui主要由两个页面构成，用户填写完所有的信息之后点击确认
 ![image](https://github.com/PowerfulSpider/loans/blob/master/doc/页面1.jpg)
 2. 页面2，用户输入更详细的信息\
 ![image](https://github.com/PowerfulSpider/loans/blob/master/doc/页面2.jpg)
-3. 输入完所有的信息之后用户点击确认提交，会有弹框提示表明当前操作是否成功\
+3. 输入完所有的信息之后用户点击确认提交，会有弹框提示表明当前操作是否成功
